@@ -1,0 +1,33 @@
+---
+- name: Wait servers
+  hosts: all
+  gather_facts: no
+  pre_tasks:
+    - name: Wait server
+      wait_for_connection:
+    - name: Gather facts for first time
+      setup:
+
+- name: Firewall
+  hosts: all
+  become: true
+  tasks:
+    - name: Allow SSH Port
+      iptables:
+        chain: INPUT
+        protocol: tcp
+        destination_port: 22
+        jump: ACCEPT
+    - name: Allow connections on multiple ports
+      iptables:
+        chain: INPUT
+        protocol: tcp
+        destination_ports:
+          - "80"
+          - "443"
+          - "8084"
+        jump: ACCEPT
+    - name: Set the policy for the INPUT chain to DROP
+      iptables:
+        chain: INPUT
+        policy: ACCEPT

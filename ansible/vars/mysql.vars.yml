@@ -1,0 +1,15 @@
+mysql_slow_query_log_enabled: true
+mysql_slow_query_time: "5"
+mysql_root_password_update: true
+mysql_user_password_update: true
+mysql_config_include_dir: /etc/mysql/mysql.conf.d
+mysql_root_password: 2FikAkRULpQe
+mysql_users:
+  - name: test
+    host: "localhost"
+    password: gSh6d4z2vQYM
+    priv: "test.*:ALL"
+mysql_databases: 
+  - name: test
+    collation: utf8_general_ci
+    encoding: utf8

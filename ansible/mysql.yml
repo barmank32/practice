@@ -1,0 +1,9 @@
+---
+- name: Install MySQL Server
+  hosts: servers
+  vars_files:
+    - vars/mysql.vars.yml
+  roles:
+    - role: geerlingguy.mysql
+      become: yes
+      tags: mysql

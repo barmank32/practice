@@ -1,0 +1,42 @@
+---
+- name: Install TCG packages.
+  hosts: servers
+  become: yes
+  vars_files:
+    - vars/mysql.vars.yml
+  tasks:
+    - name: Install RPM
+      yum:
+        name: https://cloud.imhio.com/s/wFznArF4LsB7kfW/download
+        state: present
+
+    - name: Fetch sample config
+      fetch:
+        src: /etc/tcg/tcg.config.sample.json
+        dest: /tmp/tcg.config.sample.json
+        flat: yes
+
+    - name: Load sample config
+      include_vars:
+        file: /tmp/tcg.config.sample.json
+        name: sample_config
+    - name: Modify_config_file
+      ansible.utils.update_fact:
+        updates:
+          - path: sample_config.mysql.user
+            value: "{{mysql_users[0].name}}"
+          - path: sample_config.mysql.pass
+            value: "{{mysql_users[0].password}}"
+          - path: sample_config.mysql.database
+            value: "{{mysql_databases[0].name}}"
+      register: updated
+    - name: write config file
+      copy: 
+        content: "{{ updated | to_nice_json }}" 
+        dest: /etc/tcg/tcg.json
+    - name: Enable and Start service
+      service:
+        name: tcg
+        state: started
+        enabled: yes
+
