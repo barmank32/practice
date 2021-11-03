@@ -15,7 +15,7 @@ public_key_path          = "~/.ssh/appuser.pub"
 privat_key_path          = "~/.ssh/appuser"
 zone                     = "ru-central1-b"
 ```
-## 2. запуск проекта
+## 2. Запуск проекта
 ```
 cd terraform
 terraform apply
