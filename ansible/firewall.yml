@@ -30,4 +30,4 @@
     - name: Set the policy for the INPUT chain to DROP
       iptables:
         chain: INPUT
-        policy: ACCEPT
+        policy: DROP
