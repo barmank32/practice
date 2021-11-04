@@ -38,9 +38,16 @@
       copy: 
         content: "{{ updated.sample_config | to_nice_json }}" 
         dest: /etc/tcg/tcg.json
+      notify: reload tcg
+
     - name: Enable and Start service
       service:
         name: tcg
         state: started
         enabled: yes
 
+  handlers:
+    - name: reload tcg
+      systemd: 
+        name: tcg
+        state: restarted
