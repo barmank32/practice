@@ -32,7 +32,7 @@
       register: updated
     - name: write config file
       copy: 
-        content: "{{ updated | to_nice_json }}" 
+        content: "{{ updated.sample_config | to_nice_json }}" 
         dest: /etc/tcg/tcg.json
     - name: Enable and Start service
       service:
