@@ -3,6 +3,15 @@
   hosts: servers
   vars_files:
     - vars/mysql.vars.yml
+  pre_tasks:
+    - name: Install the MySQL repo.
+      become: yes
+      yum_repository:
+        name: MySQL_repo
+        description: Some YUM repo
+        baseurl: http://yum.mariadb.org/10.3/centos7-amd64/
+        gpgkey: https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+        gpgcheck: yes
   roles:
     - role: geerlingguy.mysql
       become: yes
