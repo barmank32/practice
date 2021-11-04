@@ -29,6 +29,10 @@
             value: "{{mysql_users[0].password}}"
           - path: sample_config.mysql.database
             value: "{{mysql_databases[0].name}}"
+          - path: sample_config.mysql.host
+            value: "{{mysql_users[0].host}}"
+          - path: sample_config.log.graylog.host
+            value: "{{ansible_fqdn}}"
       register: updated
     - name: write config file
       copy: 
