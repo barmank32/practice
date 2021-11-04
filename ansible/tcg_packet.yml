@@ -23,6 +23,8 @@
     - name: Modify_config_file
       ansible.utils.update_fact:
         updates:
+          - path: sample_config.server.host
+            value: "0.0.0.0"
           - path: sample_config.mysql.user
             value: "{{mysql_users[0].name}}"
           - path: sample_config.mysql.pass
