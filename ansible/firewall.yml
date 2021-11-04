@@ -12,6 +12,17 @@
   hosts: all
   become: true
   tasks:
+    - name: Allow related and established connections
+      iptables:
+        chain: INPUT
+        ctstate: ESTABLISHED,RELATED
+        jump: ACCEPT
+        rule_num: 1
+    - name: Allow Localhost
+      ansible.builtin.iptables:
+        chain: INPUT
+        source: 127.0.0.1
+        jump: ACCEPT
     - name: Allow SSH Port
       iptables:
         chain: INPUT
