@@ -1,8 +1,6 @@
-mysql_slow_query_log_enabled: true
-mysql_slow_query_time: "5"
+mysql_pid_file: /tmp/mariadb.pid
 mysql_root_password_update: true
 mysql_user_password_update: true
-mysql_config_include_dir: /etc/mysql/mysql.conf.d
 mysql_root_password: 2FikAkRULpQe
 mysql_skip_name_resolve: true
 mysql_users:
